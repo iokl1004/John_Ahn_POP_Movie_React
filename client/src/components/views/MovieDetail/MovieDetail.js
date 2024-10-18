@@ -4,10 +4,13 @@ import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import Favorite from './Sections/Favorite';
+import { useSelector } from "react-redux";
 
 import { Row } from 'antd';
 
 function MovieDetail(props) {
+    const user = useSelector(state => state.user)
+
     let movieId = props.match.params.movieId
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
@@ -51,7 +54,10 @@ function MovieDetail(props) {
             {/* Body */}
             <div style={{ width: '85%', margin : '1rem auto '}}>
                 <div style={{ display :'flex', justifyContent : 'flex-end'}} >
-                    <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')}/>
+                    {/* 로그인을 한 유저에게만, "Add to Favorite" Button 보이게 하기 */}
+                    {user.userData && user.userData.isAuth &&
+                        <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')}/>
+                    }
                 </div>
 
                 {/* Movie Info */}
@@ -63,7 +69,7 @@ function MovieDetail(props) {
                 {/* Actors Grid */}
 
                 <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
-                    <button onClick={toggleActorView}> Toggle Actor View </button>
+                    <button onClick={toggleActorView}> 배우 더 보기... </button>
                 </div>
 
                 {/* ActorToggle 인 경우에만 배우들의 사진을 보여줘라! */}
@@ -72,10 +78,11 @@ function MovieDetail(props) {
                         {Casts && Casts.map((cast, index) => (
                             <React.Fragment key={index}>
                                 <GridCards
-                                    image={cast.profile_path ?
+                                    character={cast.character}  // 배역명
+                                    image={cast.profile_path ?  // 배우 프로필 사진
                                         // poster_path값이 없을 경우 null값 처리
                                         `${IMAGE_BASE_URL}w500${cast.profile_path}` : null}
-                                    characterName={cast.name}
+                                    characterName={cast.name}   // 배우명
                                 />
                             </React.Fragment>
                         ))}
