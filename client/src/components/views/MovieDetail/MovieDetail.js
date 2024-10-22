@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { List } from 'antd'
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import Favorite from './Sections/Favorite';
 import { useSelector } from "react-redux";
+import LikeDislikes from './Sections/LikeDislikes';
 
 import { Row } from 'antd';
 
@@ -24,7 +26,7 @@ function MovieDetail(props) {
         fetch(endponitInfo)
         .then(response => response.json())
         .then(response => {
-            console.log(response)
+            // console.log(response)
             setMovie(response)
         })
 
@@ -32,7 +34,7 @@ function MovieDetail(props) {
         fetch(endpointCrew)
         .then(response => response.json())
         .then(response => {
-            console.log('responseForCrew', response)
+            // console.log('responseForCrew', response)
             setCasts(response.cast)
         })
     }, [])
@@ -88,8 +90,14 @@ function MovieDetail(props) {
                         ))}
                     </Row>
                 }
-                
-
+                <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
+                    <LikeDislikes
+                        
+                        movie
+                        userId={localStorage.getItem('userId')}
+                        movieId={movieId}
+                    />
+                </div>
             </div>
         </div>
     )

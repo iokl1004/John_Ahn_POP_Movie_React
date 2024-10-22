@@ -17,7 +17,7 @@ function FavoritePage() {
         Axios.post('/api/favorite/getFavoredMovie', { userFrom : localStorage.getItem('userId') })
         .then(response => {
             if(response.data.success) {
-                console.log(response.data)
+                // console.log(response.data)
                 setFavorites(response.data.favorites)
             } else {
                 alert('영화 정보를 가져오는데 실패 했습니다.')

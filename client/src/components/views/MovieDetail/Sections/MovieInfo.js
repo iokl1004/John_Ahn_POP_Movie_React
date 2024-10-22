@@ -10,8 +10,6 @@ function MovieInfo(props) {
         return returnString;
     }
 
-    console.log(movie)
-
     return (
         <Descriptions title="Movie Info" bordered>
             <Descriptions.Item label="제목">{movie.original_title}</Descriptions.Item>

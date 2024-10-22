@@ -24,7 +24,7 @@ function Favorite(props) {
         // 얼마나 많은 사람이 이 영화를 Favorite 리스트에 넣었는지 그 숫자 정보 얻기
         Axios.post('/api/favorite/favoriteNumber', variables)
             .then(response => {
-                console.log(response.data)
+                // console.log(response.data)
                 setFavoriteNumber(response.data.favoriteNumber)
                 if(response.data.success) {
                 } else {
