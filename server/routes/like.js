@@ -12,9 +12,9 @@ router.post("/getLikes", (req, res) => {
     if (req.body.movieId) {
       variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    //   variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+      variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
     Like.find(variable).exec((err, likes) => {
       if (err) return res.status(400).send(err);
       res.status(200).json({ success: true, likes });
@@ -26,9 +26,9 @@ router.post("/getDislikes", (req, res) => {
     if (req.body.movieId) {
         variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    // variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+    variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
 
     Dislike.find(variable).exec((err, dislikes) => {
     if (err) return res.status(400).send(err);
@@ -41,9 +41,9 @@ router.post("/upLike", (req, res) => {
     if (req.body.movieId) {
         variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    //     variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+        variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
     // Like collection에다가 클릭 정보를 넣기
 
     const like = new Like(variable);
@@ -63,9 +63,9 @@ router.post("/unLike", (req, res) => {
     if (req.body.movieId) {
         variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    //     variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+        variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
 
     Like.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
@@ -78,9 +78,9 @@ router.post("/unDislike", (req, res) => {
     if (req.body.movieId) {
         variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    //     variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+        variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
 
     Dislike.findOneAndDelete(variable).exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
@@ -93,9 +93,9 @@ router.post("/upDislike", (req, res) => {
     if (req.body.movieId) {
         variable = { movieId: req.body.movieId, userId: req.body.userId };
     }
-    // else {
-    //     variable = { commentId: req.body.commentId, userId: req.body.userId };
-    // }
+    else {
+        variable = { commentId: req.body.commentId, userId: req.body.userId };
+    }
     // DisLike collection에다가 클릭 정보를 넣기
     const dislike = new Dislike(variable);
     dislike.save((err, dislikeResult) => {

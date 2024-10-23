@@ -5,18 +5,22 @@ import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
 import GridCards from '../commons/GridCards';
 import Favorite from './Sections/Favorite';
+import Comment from './Sections/Comment'            // 댓글
 import { useSelector } from "react-redux";
 import LikeDislikes from './Sections/LikeDislikes';
+import Axios from 'axios'
 
 import { Row } from 'antd';
 
 function MovieDetail(props) {
     const user = useSelector(state => state.user)
 
-    let movieId = props.match.params.movieId
+    const movieId = props.match.params.movieId;
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
     const [ActorToggle, setActorToggle] = useState(false)
+    const [Comments, setComments] = useState([]);   // Comments(댓글)가 담길 빈 배열을 만들어 준다.
+    const variable = { movieId : movieId }          // movieId : movieId 값
 
     useEffect(() => {
         let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`
@@ -37,8 +41,26 @@ function MovieDetail(props) {
             // console.log('responseForCrew', response)
             setCasts(response.cast)
         })
+
+        // 해당 Movie의 모든 댓글을 가져오기
+        Axios.post('/api/comment/getComments', variable)
+        .then((response) => {
+            if(response.data.success) {
+                console.log(response.data.comments)
+                setComments(response.data.comments)
+            } else {
+                alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')
+            }
+        });
     }, [])
 
+    const refreshFunction = (newComment) => {
+        // 자식컴포넌트에서 버튼을 클릭하면, 자식에서 받아온 comment정보(새 댓글)를 newComment라고 한다.
+        // console.log(newComment);
+        setComments(Comments.concat(newComment))    // Comments(댓글)가 담긴 배열에 자식에서 받아온 newComment(새 댓글)를 추가한다.
+    }
+
+    // 배우 더보기 버튼 클릭 시, 배우를 더 보여준다
     const toggleActorView = () => {
         setActorToggle(!ActorToggle)
     }
@@ -92,12 +114,18 @@ function MovieDetail(props) {
                 }
                 <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
                     <LikeDislikes
-                        
                         movie
                         userId={localStorage.getItem('userId')}
                         movieId={movieId}
                     />
                 </div>
+
+                {/* Comment */}
+                <Comment
+                    refreshFunction={refreshFunction}
+                    commentLists={Comments}
+                    movieId={movieId}
+                />
             </div>
         </div>
     )

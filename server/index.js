@@ -35,6 +35,7 @@ app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/favorite', require('./routes/favorite'));   // Favorite
+app.use('/api/comment', require('./routes/comment'));       // 댓글
 app.use('/api/like', require('./routes/like'));             // 좋아요
 
 //use this to show the image you have in node js server to client (react js)

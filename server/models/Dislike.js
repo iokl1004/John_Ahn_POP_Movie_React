@@ -6,10 +6,10 @@ const dislikeSchema = mongoose.Schema({
           type : Schema.Types.ObjectId
         , ref:'User'
     },
-    // commentId : {
-    //       type : Schema.Types.ObjectId
-    //     , ref:'Comment'
-    // },
+    commentId : {
+          type : Schema.Types.ObjectId
+        , ref:'Comment'
+    },
     movieId : {
           type : String
         , ref:'Movie'

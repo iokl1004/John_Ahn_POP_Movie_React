@@ -18,9 +18,9 @@ function LikeDislikes(props) {
     if (props.movie) {
         variable = { movieId: props.movieId, userId: props.userId };
     }
-    // else {
-    //     variable = { commentId : props.commentId, userId: props.userId };
-    // }
+    else {
+        variable = { commentId : props.commentId, userId: props.userId };
+    }
 
     useEffect(() => {
         // 좋아요 가져오기
