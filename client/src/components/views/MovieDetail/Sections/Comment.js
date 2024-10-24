@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';  // 댓글
 import ReplyComment from './ReplyComment';    // 대댓글
+import './Comment.css';
 
 function Comment(props) {
   const movieId = props.movieId;                      // Movie ID
@@ -67,6 +68,9 @@ function Comment(props) {
 
       {/* Root Comment Form */}
 
+      <h4 className="comment-write-heading">
+        <strong>댓글쓰기</strong>
+      </h4>
       <form style={{ display : 'flex'}} onSubmit={onSubmit} >
         <textarea
           style = {{ width : '100%', borderRadius : '5px' }}
@@ -75,7 +79,14 @@ function Comment(props) {
           placeholder='코멘트를 작성해 주세요'
         />
         <br />
-        <button disabled={!commentValue} style ={{ width : '20%', height : '52px' }} onClick={onSubmit}>Submit</button>
+        <button
+          disabled={!commentValue}
+          className='btn-e btn-e-xlg btn-e-red'
+          // style ={{ width : '20%', height : '52px' }}
+          onClick={onSubmit}
+        >
+          댓글등록
+        </button>
       </form>
     </div>
   )

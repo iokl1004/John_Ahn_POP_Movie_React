@@ -36,7 +36,7 @@ function SingleComment(props) {
         if(!variables.writer) {
             alert("로그인 후 댓글이용이 가능합니다.");
         } else if(!variables.content.trim()) {   // Space바만 따다다닥 눌렀을때 예외처리
-          alert("코멘트를 작성해 주세요.");
+          alert("코멘트를 작성해 주세요zz.");
         } else {
             Axios.post('/api/comment/saveComment', variables)
             .then((response) => {
@@ -58,7 +58,7 @@ function SingleComment(props) {
             onClick={onClickReplyOpen}
             key="comment-basic-reply-to"
         >
-            Reply to
+            댓글쓰기
         </span>
     ]
 
@@ -81,7 +81,13 @@ function SingleComment(props) {
                         placeholder='코멘트를 작성해 주세요'
                     />
                     <br />
-                    <button disabled={!CommentValue} style ={{ width : '20%', height : '52px' }} onClick={onSubmit}>Submit</button>
+                    <button
+                        className='btn-e btn-e-xlg btn-e-red'
+                        disabled={!CommentValue}
+                        onClick={onSubmit}
+                    >
+                        댓글등록
+                    </button>
                 </form>
             )}
         </div>

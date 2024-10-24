@@ -8,6 +8,7 @@ import Favorite from './Sections/Favorite';
 import Comment from './Sections/Comment'            // 댓글
 import { useSelector } from "react-redux";
 import LikeDislikes from './Sections/LikeDislikes';
+import CommentCount from './Sections/CommentCount'; // 댓글 카운트
 import Axios from 'axios'
 
 import { Row } from 'antd';
@@ -19,8 +20,9 @@ function MovieDetail(props) {
     const [Movie, setMovie] = useState([])
     const [Casts, setCasts] = useState([])
     const [ActorToggle, setActorToggle] = useState(false)
-    const [Comments, setComments] = useState([]);   // Comments(댓글)가 담길 빈 배열을 만들어 준다.
-    const variable = { movieId : movieId }          // movieId : movieId 값
+    const [Comments, setComments] = useState([]);           // Comments(댓글)가 담길 빈 배열을 만들어 준다.
+    const [CommentCounts, setCommentCounts] = useState(0);   // Comments(댓글)의 갯수
+    const variable = { movieId : movieId }                  // movieId : movieId 값
 
     useEffect(() => {
         let endpointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`
@@ -46,8 +48,9 @@ function MovieDetail(props) {
         Axios.post('/api/comment/getComments', variable)
         .then((response) => {
             if(response.data.success) {
-                console.log(response.data.comments)
-                setComments(response.data.comments)
+                // console.log(response.data.comments);
+                setComments(response.data.comments);            // 댓글리스트에 댓글들 넣기
+                setCommentCounts(response.data.comments.length); // 댓글갯수
             } else {
                 alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')
             }
@@ -119,6 +122,11 @@ function MovieDetail(props) {
                         movieId={movieId}
                     />
                 </div>
+
+                {/* 댓글 수 */}
+                <CommentCount
+                    CommentCounts={CommentCounts}
+                />
 
                 {/* Comment */}
                 <Comment
