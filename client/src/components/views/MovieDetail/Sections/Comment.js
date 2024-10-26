@@ -3,13 +3,15 @@ import Axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';  // 댓글
 import ReplyComment from './ReplyComment';    // 대댓글
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment as faRegComment} from "@fortawesome/free-regular-svg-icons";   // 공란 comment 이미지
+import { faComment as faSolComment} from "@fortawesome/free-solid-svg-icons";     // 채워진 comment 이미지
 import './Comment.css';
 
 function Comment(props) {
   const movieId = props.movieId;                      // Movie ID
   const user = useSelector((state) => state.user);    // Redux를 이용하여, Login한 유저의 정보를 가져온다!
   const [commentValue, setCommentValue] = useState(); // 댓글
-
 
   const handleClick = (e) => {
       setCommentValue(e.currentTarget.value);
@@ -46,6 +48,16 @@ function Comment(props) {
 
   return (
     <div>
+      {/* 댓글이 한개라도 없을 경우, 등록된 댓글이 없다고 표시해주기. */}
+      {props.commentLists.length === 0 &&
+        <div className="css-upjkrn">
+          <i className="far fa-comment-dots m-r-5">
+            <FontAwesomeIcon icon={faRegComment} size='2xl' />
+          </i>
+          <strong>등록된 댓글이 없습니다.</strong>
+        </div>
+      }
+
       {/* Coment Lists */}
       {props.commentLists &&
         props.commentLists.map((comment, index) => (
@@ -69,6 +81,9 @@ function Comment(props) {
       {/* Root Comment Form */}
 
       <h4 className="comment-write-heading">
+        <i className="far fa-comment-dots m-r-5">
+          <FontAwesomeIcon icon={faSolComment} />
+        </i>
         <strong>댓글쓰기</strong>
       </h4>
       <form style={{ display : 'flex'}} onSubmit={onSubmit} >
@@ -82,7 +97,6 @@ function Comment(props) {
         <button
           disabled={!commentValue}
           className='btn-e btn-e-xlg btn-e-red'
-          // style ={{ width : '20%', height : '52px' }}
           onClick={onSubmit}
         >
           댓글등록
