@@ -62,6 +62,10 @@ function LikeDislikes(props) {
 
         // 좋아요 클릭
         const onLike = () => {
+            if (!props.user.userData._id) {
+                alert("로그인 후 Like 기능이 가능합니다.");
+                return;
+            }
             // 클릭이 안되어 있을때
             if (LikeAction === '') {
                 Axios.post('/api/like/upLike', variable).then((response) => {
@@ -92,6 +96,11 @@ function LikeDislikes(props) {
 
         // 싫어요 클릭
         const onDislike = () => {
+            if (!props.user.userData._id) {
+                alert("로그인 후 DisLike 기능이 가능합니다.");
+                return;
+            }
+
             if (DisLikeAction !== '') { // 싫어요 액션값이 빈 값이 아닌 경우 (싫어요가 이미 클릭 되어 있는 경우)
                 Axios.post('/api/like/unDislike', variable).then((response) => {
                 if (response.data.success) {

@@ -120,6 +120,7 @@ function MovieDetail(props) {
                         movie
                         userId={localStorage.getItem('userId')}
                         movieId={movieId}
+                        user={user}
                     />
                 </div>
 
