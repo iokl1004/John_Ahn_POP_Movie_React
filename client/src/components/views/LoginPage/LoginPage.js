@@ -135,7 +135,9 @@ function LoginPage(props) {
                     로그인
                 </Button>
                 </div>
-                아직 회원가입을 하지 않으셨나요?! 얼른 <a href="/register"> 회원가입 하기!</a>
+                아직 회원가입을 하지 않으셨나요?!
+                <br />
+                얼른 <a href="/register"> 회원가입 하기!</a>
               </Form.Item>
             </form>
           </div>
