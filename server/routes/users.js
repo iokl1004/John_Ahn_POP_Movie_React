@@ -15,7 +15,7 @@ router.get("/auth", auth, (req, res) => {
         isAuth: true,
         email: req.user.email,
         name: req.user.name,
-        lastname: req.user.lastname,
+        lastName: req.user.lastName,
         role: req.user.role,
         image: req.user.image,
     });
@@ -52,7 +52,13 @@ router.post("/login", (req, res) => {
                     .cookie("w_auth", user.token)
                     .status(200)
                     .json({
-                        loginSuccess: true, userId: user._id
+                        loginSuccess: true,
+                        userId: user._id,
+                        isAuth: user.isAuth,
+                        email : user.email,
+                        name: user.name,
+                        lastName : user.lastName,
+                        image : user.image
                     });
             });
         });

@@ -68,7 +68,7 @@ function RegisterPage(props) {
             email: values.email,
             password: values.password,
             name: values.name,
-            lastname: values.lastname,
+            lastName: values.lastName,
             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
           };
 
@@ -105,25 +105,8 @@ function RegisterPage(props) {
 
               <Form.Item required label="성">
                 <Input
-                  id="name"
-                  placeholder="이름을 입력하세요."
-                  type="text"
-                  value={values.name}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.name && touched.name ? 'text-input error' : 'text-input'
-                  }
-                />
-                {errors.name && touched.name && (
-                  <div className="input-feedback">{errors.name}</div>
-                )}
-              </Form.Item>
-
-              <Form.Item required label="이름">
-                <Input
                   id="lastName"
-                  placeholder="이름을 입력해 주세요."
+                  placeholder="이름을 입력하세요."
                   type="text"
                   value={values.lastName}
                   onChange={handleChange}
@@ -134,6 +117,23 @@ function RegisterPage(props) {
                 />
                 {errors.lastName && touched.lastName && (
                   <div className="input-feedback">{errors.lastName}</div>
+                )}
+              </Form.Item>
+
+              <Form.Item required label="이름">
+                <Input
+                  id="name"
+                  placeholder="이름을 입력해 주세요."
+                  type="text"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={
+                    errors.name && touched.name ? 'text-input error' : 'text-input'
+                  }
+                />
+                {errors.name && touched.name && (
+                  <div className="input-feedback">{errors.name}</div>
                 )}
               </Form.Item>
 

@@ -41,10 +41,6 @@ function FavoritePage() {
         })
     }
 
-    const onClickMovie = () => {
-        alert("ㄹㅇㅋ");
-    }
-
     const renderCards = Favorites.map((favorite, index) => {
         const content = (
             <div>

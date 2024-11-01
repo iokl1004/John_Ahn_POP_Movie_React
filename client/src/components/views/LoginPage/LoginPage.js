@@ -46,7 +46,11 @@ function LoginPage(props) {
           dispatch(loginUser(dataToSubmit))
             .then(response => {
               if (response.payload.loginSuccess) {
+                console.log(response.payload)
                 window.localStorage.setItem('userId', response.payload.userId);
+                window.localStorage.setItem('email', response.payload.email);         // Email
+                window.localStorage.setItem('lastName', response.payload.lastName);   // 성
+                window.localStorage.setItem('name', response.payload.name);           // 이름
                 if (rememberMe === true) {
                   window.localStorage.setItem('rememberMe', values.id);
                 } else {

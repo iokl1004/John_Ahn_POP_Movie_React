@@ -36,13 +36,14 @@ const tailFormItemLayout = {
 
 // 회원정보 수정페이지
 function ModifyPage(props) {
+    console.log(props);
     const dispatch = useDispatch();
     return (
         <Formik
             initialValues={{
-                email: '',
-                lastName: '',
-                name: '',
+                email: localStorage.getItem('email'),
+                lastName: localStorage.getItem('lastName'),
+                name : localStorage.getItem('name'),
                 password: '',
                 confirmPassword: ''
             }}
@@ -62,30 +63,30 @@ function ModifyPage(props) {
                 .oneOf([Yup.ref('password'), null], '비밀번호는 일치해야 합니다.')
                 .required('비밀번호 확인이 필요합니다.')
             })}
-            onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
+            // onSubmit={(values, { setSubmitting }) => {
+            //     setTimeout(() => {
 
-                    let dataToSubmit = {
-                        email: values.email,
-                        password: values.password,
-                        name: values.name,
-                        lastname: values.lastname,
-                        image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
-                    };
+            //         let dataToSubmit = {
+            //             email: values.email,
+            //             password: values.password,
+            //             name: values.name,
+            //             lastName: values.lastName,
+            //             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
+            //         };
 
-                dispatch(registerUser(dataToSubmit)).then(response => {
-                    if (response.payload.success) {
-                        props.history.push("/login");
-                    } else if (response.payload.err.code === 11000) {
-                        alert("이미 가입된 Email이 존재합니다.");
-                    } else {
-                        alert(response.payload.err.errmsg);
-                    }
-                })
+            //     dispatch(registerUser(dataToSubmit)).then(response => {
+            //         if (response.payload.success) {
+            //             props.history.push("/login");
+            //         } else if (response.payload.err.code === 11000) {
+            //             alert("이미 가입된 Email이 존재합니다.");
+            //         } else {
+            //             alert(response.payload.err.errmsg);
+            //         }
+            //     })
 
-                setSubmitting(false);
-                }, 500);
-            }}
+            //     setSubmitting(false);
+            //     }, 500);
+            // }}
         >
             {props => {
                 const {
@@ -107,25 +108,8 @@ function ModifyPage(props) {
 
                             <Form.Item required label="성">
                                 <Input
-                                    id="name"
-                                    placeholder="이름을 입력하세요."
-                                    type="text"
-                                    value={values.name}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className={
-                                        errors.name && touched.name ? 'text-input error' : 'text-input'
-                                    }
-                                />
-                                {errors.name && touched.name && (
-                                    <div className="input-feedback">{errors.name}</div>
-                                )}
-                            </Form.Item>
-
-                            <Form.Item required label="이름">
-                                <Input
                                     id="lastName"
-                                    placeholder="이름을 입력해 주세요."
+                                    placeholder="성을 입력하세요."
                                     type="text"
                                     value={values.lastName}
                                     onChange={handleChange}
@@ -136,6 +120,23 @@ function ModifyPage(props) {
                                 />
                                 {errors.lastName && touched.lastName && (
                                     <div className="input-feedback">{errors.lastName}</div>
+                                )}
+                            </Form.Item>
+
+                            <Form.Item required label="이름">
+                                <Input
+                                    id="name"
+                                    placeholder="이름을 입력해 주세요."
+                                    type="text"
+                                    value={values.name}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={
+                                        errors.name && touched.name ? 'text-input error' : 'text-input'
+                                    }
+                                />
+                                {errors.name && touched.name && (
+                                    <div className="input-feedback">{errors.name}</div>
                                 )}
                             </Form.Item>
 
