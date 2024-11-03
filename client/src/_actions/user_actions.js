@@ -4,6 +4,7 @@ import {
     REGISTER_USER,
     AUTH_USER,
     LOGOUT_USER,
+    MODIFY_USER,
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
@@ -47,3 +48,13 @@ export function logoutUser(){
     }
 }
 
+// 회원정보 수정
+export function modifyUser(dataToSubmit){
+    const request = axios.post(`${USER_SERVER}/modify`,dataToSubmit)
+        .then(response => response.data);
+    
+    return {
+        type: MODIFY_USER,
+        payload: request
+    }
+}

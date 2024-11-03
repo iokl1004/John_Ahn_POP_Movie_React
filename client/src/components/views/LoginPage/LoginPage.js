@@ -46,7 +46,6 @@ function LoginPage(props) {
           dispatch(loginUser(dataToSubmit))
             .then(response => {
               if (response.payload.loginSuccess) {
-                console.log(response.payload)
                 window.localStorage.setItem('userId', response.payload.userId);
                 window.localStorage.setItem('email', response.payload.email);         // Email
                 window.localStorage.setItem('lastName', response.payload.lastName);   // 성

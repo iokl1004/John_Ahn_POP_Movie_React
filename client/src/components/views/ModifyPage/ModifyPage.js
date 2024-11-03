@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { registerUser } from "../../../_actions/user_actions";
+import { modifyUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
 
 import {
@@ -63,30 +63,41 @@ function ModifyPage(props) {
                 .oneOf([Yup.ref('password'), null], '비밀번호는 일치해야 합니다.')
                 .required('비밀번호 확인이 필요합니다.')
             })}
-            // onSubmit={(values, { setSubmitting }) => {
-            //     setTimeout(() => {
+            onSubmit={(values, { setSubmitting }) => {
+                setTimeout(() => {
 
-            //         let dataToSubmit = {
-            //             email: values.email,
-            //             password: values.password,
-            //             name: values.name,
-            //             lastName: values.lastName,
-            //             image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
-            //         };
+                    let dataToSubmit = {
+                        email: values.email,
+                        password: values.password,
+                        name: values.name,
+                        lastName: values.lastName,
+                        image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
+                    };
 
-            //     dispatch(registerUser(dataToSubmit)).then(response => {
-            //         if (response.payload.success) {
-            //             props.history.push("/login");
-            //         } else if (response.payload.err.code === 11000) {
-            //             alert("이미 가입된 Email이 존재합니다.");
-            //         } else {
-            //             alert(response.payload.err.errmsg);
-            //         }
-            //     })
+                // dispatch(modifyUser(dataToSubmit)).then(response => {
+                //     if (response.payload.success) {
+                //         props.history.push("/login");
+                //     } else if (response.payload.err.code === 11000) {
+                //         alert("이미 가입된 Email이 존재합니다.");
+                //     } else {
+                //         alert(response.payload.err.errmsg);
+                //     }
+                // })
 
-            //     setSubmitting(false);
-            //     }, 500);
-            // }}
+                dispatch(modifyUser(dataToSubmit)).then(response => {
+                    if (response.payload.success) {
+                        console.log(dataToSubmit);
+                        // props.history.push("/login");
+                    } else if (response.payload.err.code === 11000) {
+                        alert("이미 가입된 Email이 존재합니다.");
+                    } else {
+                        alert(response.payload.err.errmsg);
+                    }
+                })
+
+                setSubmitting(false);
+                }, 500);
+            }}
         >
             {props => {
                 const {

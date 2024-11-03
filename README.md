@@ -111,9 +111,27 @@
 
 ---
 
-20241101(목)
+20241101(금)
 
 1. 회원정보 수정 (진행중)
 
 - 회원정보 수정 페이지 Form에 로그인 정보값 가져오기(성, 이름, Email) (완료)
   - localStorage에 로그인 정보를 담아서 가져오는 방식으로 선정.
+
+---
+
+20241103(일)
+
+1. 회원정보 수정 (진행중)
+
+- 회원정보 수정 BackEnd 수정개발 진행중
+  - user_reducer.js
+    - MODIFY_USER 추가 (완료)
+  - types.js
+    - MODIFY_USER 추가 (완료)
+  - user_actions.js
+    - export function modifyUser 추가 (완료)
+  - ModifyPage.js 수정
+    - onSubmit 버튼 클릭시, dispatch 부분 추가 (수정중)
+  - users.js
+    - router.post("/modify", (req, res) => { ...... 추가 (수정중)
