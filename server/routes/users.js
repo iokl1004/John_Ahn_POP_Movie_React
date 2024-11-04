@@ -76,10 +76,23 @@ router.get("/logout", auth, (req, res) => {
 
 // 회원정보 수정 
 router.post("/modify", (req, res) => {
+    // const user = new User(req.body);
 
-    const user = new User(req.body);
+    // user.save({ _id: user._id }, (err, doc) => {
+    //     if (err) return res.json({ success: false, err });
+    //     return res.status(200).json({
+    //         success: true
+    //     });
+    // });
 
-    user.save((err, doc) => {
+    // const user = new User(req.body);
+
+    console.log(req.body._id);
+    User.findOneAndUpdate({ _id: req.body._id }, {
+            email: req.body.email,
+            name: req.body.name,
+            lastName: req.body.lastName,
+        }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
             success: true

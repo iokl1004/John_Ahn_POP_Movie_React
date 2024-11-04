@@ -135,3 +135,15 @@
     - onSubmit 버튼 클릭시, dispatch 부분 추가 (수정중)
   - users.js
     - router.post("/modify", (req, res) => { ...... 추가 (수정중)
+
+---
+
+20241104(월)
+
+1. 회원정보 수정 (완료)
+
+- 회원정보 수정 BackEnd 수정개발
+  - ModifyPage.js 수정
+    - onSubmit 버튼 클릭시, dispatch 부분 추가 (완료)
+  - users.js
+    - router.post("/modify", (req, res) => { ...... 추가 (완료)

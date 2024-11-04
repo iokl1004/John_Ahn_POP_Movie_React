@@ -67,6 +67,7 @@ function ModifyPage(props) {
                 setTimeout(() => {
 
                     let dataToSubmit = {
+                        _id: localStorage.getItem('userId'),
                         email: values.email,
                         password: values.password,
                         name: values.name,
@@ -85,9 +86,10 @@ function ModifyPage(props) {
                 // })
 
                 dispatch(modifyUser(dataToSubmit)).then(response => {
+                    console.log(response.payload);
                     if (response.payload.success) {
-                        console.log(dataToSubmit);
-                        // props.history.push("/login");
+                        props.history.push("/login");
+                        alert("정상적으로 회원정보가 수정되었습니다!");
                     } else if (response.payload.err.code === 11000) {
                         alert("이미 가입된 Email이 존재합니다.");
                     } else {
