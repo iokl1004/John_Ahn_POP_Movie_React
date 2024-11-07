@@ -31,4 +31,15 @@ router.post("/getComments", (req, res) => {
     });
 });
 
+// 대댓글의 갯수 확인
+router.post("/getReplyComment", (req, res) => {
+    console.log(req.body)
+    Comment.find({ movieId : req.body.movieId, responseTo : req.body.commentId }).count() 
+    .populate("writer")
+    .exec(( err, replyCommentCount) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success : replyCommentCount });
+    });
+});
+
 module.exports = router;

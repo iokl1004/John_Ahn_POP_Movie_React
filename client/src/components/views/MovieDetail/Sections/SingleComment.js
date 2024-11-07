@@ -7,6 +7,8 @@ import LikeDislikes from './LikeDislikes';
 
 function SingleComment(props) {
 
+    console.log(props);
+
     const user = useSelector((state) => state.user);        // Login한 유저의 정보를 가져온다!
     const [OpenReply, setOpenRelpy] = useState(false);      // 대댓글 상태
     const [CommentValue, setCommentValue] = useState("")    // 대댓글
@@ -29,7 +31,7 @@ function SingleComment(props) {
         const variables = {
             content : CommentValue          // 대댓글
           , writer : user.userData._id      // 대댓글단 유저의 ID (Login 한 유저의 ID)
-          , movieId : props.movieId           // 비디오 ID
+          , movieId : props.movieId         // 비디오 ID
           , responseTo : props.comment._id  // 댓글단 유저의 ID
         }
 
@@ -51,6 +53,31 @@ function SingleComment(props) {
         }
     }
 
+    // 댓글삭제기능 추가    20241107(목)
+    const onClickReplyDelete = (e) => {
+        if(props.comment.writer._id !== user.userData._id)
+        {
+            alert('본인이 작성한 댓글만 삭제가 가능합니다.')
+        }
+        else
+        {
+            // 대댓글이 있는지 확인
+            const variables = {
+                commentId : props.comment._id   // comment Id
+              , movieId : props.movieId         // 비디오 ID
+            }
+
+            Axios.post('/api/comment/getReplyComment', variables)
+            .then((response) => {
+            if(response.data.success === 0) {   // 대댓글의 갯수가 0일경우 삭제
+                alert(response.data.success)
+            } else {
+                alert('대댓글이 존재하여, 댓글을 삭제하지 못하였습니다.') // 대댓글의 갯수가 0이 아닐경우 미삭제
+            }})
+        }
+        
+    }
+
     const actions = [
         // 해당 댓글에 대한 좋아요/싫어요 가져오기
         <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
@@ -60,6 +87,13 @@ function SingleComment(props) {
         >
             댓글쓰기
         </span>
+        , <span
+            onClick={onClickReplyDelete}
+            key="comment-basic-reply-to"
+        >
+            댓글삭제
+        </span>
+        
     ]
 
     return (

@@ -62,7 +62,8 @@ function LikeDislikes(props) {
 
         // 좋아요 클릭
         const onLike = () => {
-            if (!props.user.userData._id) {
+            // if (!props.user.userData._id) {
+            if (!props.userId) {
                 alert("로그인 후 Like 기능이 가능합니다.");
                 return;
             }
@@ -96,7 +97,8 @@ function LikeDislikes(props) {
 
         // 싫어요 클릭
         const onDislike = () => {
-            if (!props.user.userData._id) {
+            // if (!props.user.userData._id) {
+            if (!props.userId) {
                 alert("로그인 후 DisLike 기능이 가능합니다.");
                 return;
             }

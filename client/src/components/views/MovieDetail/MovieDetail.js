@@ -49,7 +49,7 @@ function MovieDetail(props) {
         .then((response) => {
             if(response.data.success) {
                 // console.log(response.data.comments);
-                setComments(response.data.comments);            // 댓글리스트에 댓글들 넣기
+                setComments(response.data.comments);             // 댓글리스트에 댓글들 넣기
                 setCommentCounts(response.data.comments.length); // 댓글갯수
             } else {
                 alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')

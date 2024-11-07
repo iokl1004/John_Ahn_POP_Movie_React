@@ -4,6 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { modifyUser } from "../../../_actions/user_actions";
 import { useDispatch } from "react-redux";
+import axios from 'axios';
+import { USER_SERVER } from "../../Config";
 
 import {
     Form,
@@ -36,7 +38,17 @@ const tailFormItemLayout = {
 
 // 회원정보 수정페이지
 function ModifyPage(props) {
-    console.log(props);
+
+    const logoutHandler = () => {
+        axios.get(`${USER_SERVER}/logout`).then(response => {
+          if (response.status === 200) {
+            props.history.push("/login");
+          } else {
+            alert('Log Out Failed')
+          }
+        });
+      };
+
     const dispatch = useDispatch();
     return (
         <Formik
@@ -75,21 +87,12 @@ function ModifyPage(props) {
                         image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
                     };
 
-                // dispatch(modifyUser(dataToSubmit)).then(response => {
-                //     if (response.payload.success) {
-                //         props.history.push("/login");
-                //     } else if (response.payload.err.code === 11000) {
-                //         alert("이미 가입된 Email이 존재합니다.");
-                //     } else {
-                //         alert(response.payload.err.errmsg);
-                //     }
-                // })
-
                 dispatch(modifyUser(dataToSubmit)).then(response => {
                     console.log(response.payload);
                     if (response.payload.success) {
-                        props.history.push("/login");
-                        alert("정상적으로 회원정보가 수정되었습니다!");
+                        alert("정상적으로 회원정보가 수정되었습니다! 다시 로그인 해주세요.");
+                        logoutHandler();
+                        // props.history.push("/login");
                     } else if (response.payload.err.code === 11000) {
                         alert("이미 가입된 Email이 존재합니다.");
                     } else {
