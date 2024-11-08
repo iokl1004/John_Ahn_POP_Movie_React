@@ -33,12 +33,22 @@ router.post("/getComments", (req, res) => {
 
 // 대댓글의 갯수 확인
 router.post("/getReplyComment", (req, res) => {
-    console.log(req.body)
     Comment.find({ movieId : req.body.movieId, responseTo : req.body.commentId }).count() 
     .populate("writer")
     .exec(( err, replyCommentCount) => {
-        if(err) return res.status(400).send(err);
-        res.status(200).json({ success : replyCommentCount });
+        if(err) {
+            return res.status(400).send(err);
+        } if(replyCommentCount === 0) {     // 대댓글이 존재 하지 않을 경우 삭제
+            Comment.remove({ movieId : req.body.movieId, '_id' : req.body.commentId })
+            .exec((err) => {
+                if(err) {
+                    return res.status(400).send(err);
+                }
+                res.status(200).json({ success : true});            // 정상적으로 삭제 되었다고 알려줌.
+            })
+        } else {
+            res.status(200).json({ success : replyCommentCount });  // 대댓글의 갯수를 returne 해줌.
+        }
     });
 });
 

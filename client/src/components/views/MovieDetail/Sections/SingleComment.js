@@ -38,15 +38,14 @@ function SingleComment(props) {
         if(!variables.writer) {
             alert("로그인 후 댓글이용이 가능합니다.");
         } else if(!variables.content.trim()) {   // Space바만 따다다닥 눌렀을때 예외처리
-          alert("코멘트를 작성해 주세요zz.");
+          alert("코멘트를 작성해 주세요.");
         } else {
             Axios.post('/api/comment/saveComment', variables)
             .then((response) => {
             if(response.data.success) {
-                console.log(response.data.result)
                 setCommentValue("");
                 setOpenRelpy(false);                        // Submit 완료 후, 코멘트 작성창 닫기!
-                props.refreshFunction(response.data.result) // 상위 컴포넌트에 새로운 댓글목록을 다시 전달함.
+                props.refreshFunction(response.data.result, 'create') // 상위 컴포넌트에 새로운 댓글목록을 다시 전달함.
             } else {
                 alert('코멘트를 저장하지 못했습니다.')
             }})
@@ -69,13 +68,14 @@ function SingleComment(props) {
 
             Axios.post('/api/comment/getReplyComment', variables)
             .then((response) => {
-            if(response.data.success === 0) {   // 대댓글의 갯수가 0일경우 삭제
-                alert(response.data.success)
+            if(response.data.success === true) {   // 대댓글의 갯수가 0일경우 삭제
+                alert('댓글 삭제에 성공하였습니다.');
+                props.refreshFunction(variables.commentId, 'delete')    // 상위 컴포넌트에 삭제한 commentId를 전달해줌.
             } else {
-                alert('대댓글이 존재하여, 댓글을 삭제하지 못하였습니다.') // 대댓글의 갯수가 0이 아닐경우 미삭제
+                console.log(response.data.success);                     // 댓글 갯수 확인
+                alert('대댓글이 존재하여, 댓글을 삭제하지 못하였습니다.')   // 대댓글의 갯수가 0이 아닐경우 미삭제
             }})
         }
-        
     }
 
     const actions = [

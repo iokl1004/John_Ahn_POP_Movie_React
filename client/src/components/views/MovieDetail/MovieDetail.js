@@ -57,10 +57,13 @@ function MovieDetail(props) {
         });
     }, [])
 
-    const refreshFunction = (newComment) => {
+    const refreshFunction = (newComment, status) => {
         // 자식컴포넌트에서 버튼을 클릭하면, 자식에서 받아온 comment정보(새 댓글)를 newComment라고 한다.
-        // console.log(newComment);
-        setComments(Comments.concat(newComment))    // Comments(댓글)가 담긴 배열에 자식에서 받아온 newComment(새 댓글)를 추가한다.
+        if(status === 'create') {
+            setComments(Comments.concat(newComment))    // Comments(댓글)가 담긴 배열에 자식에서 받아온 newComment(새 댓글)를 추가한다.
+        } else if(status === 'delete') {                
+            setComments(Comments.filter(comment=>comment._id !== newComment))   // singleComment에서 삭제한 CommentId를 전달받아, Comments Status를 업데이트한다!
+        }
     }
 
     // 배우 더보기 버튼 클릭 시, 배우를 더 보여준다

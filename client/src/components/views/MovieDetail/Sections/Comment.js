@@ -38,7 +38,7 @@ function Comment(props) {
         if(response.data.success) {
           // console.log(response.data.result)
           setCommentValue("");
-          props.refreshFunction(response.data.result) // 부모컴포넌트 DB에 저장된 댓글 정보를 전달해줌.
+          props.refreshFunction(response.data.result, 'create') // 부모컴포넌트 DB에 저장된 댓글 정보를 전달해줌.
         } else {
           alert('코멘트를 저장하지 못했습니다.')
         }
