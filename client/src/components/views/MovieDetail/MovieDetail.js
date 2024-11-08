@@ -45,6 +45,11 @@ function MovieDetail(props) {
         })
 
         // 해당 Movie의 모든 댓글을 가져오기
+        getCommentsFunction();
+    }, [])
+
+    // 해당 Movie의 모든 댓글을 가져오기
+    const getCommentsFunction = () => {
         Axios.post('/api/comment/getComments', variable)
         .then((response) => {
             if(response.data.success) {
@@ -55,14 +60,18 @@ function MovieDetail(props) {
                 alert('코멘트 정보를 가져오는 것을 실패 하였습니다.')
             }
         });
-    }, [])
+    }
 
     const refreshFunction = (newComment, status) => {
+        // status를 구분짓지 말고 그냥 getCommentsFunction()으로 통일해도 될것 같은데....
+
         // 자식컴포넌트에서 버튼을 클릭하면, 자식에서 받아온 comment정보(새 댓글)를 newComment라고 한다.
         if(status === 'create') {
-            setComments(Comments.concat(newComment))    // Comments(댓글)가 담긴 배열에 자식에서 받아온 newComment(새 댓글)를 추가한다.
-        } else if(status === 'delete') {                
-            setComments(Comments.filter(comment=>comment._id !== newComment))   // singleComment에서 삭제한 CommentId를 전달받아, Comments Status를 업데이트한다!
+            // setComments(Comments.concat(newComment))    // Comments(댓글)가 담긴 배열에 자식에서 받아온 newComment(새 댓글)를 추가한다.
+            getCommentsFunction()
+        } else if(status === 'delete') {
+            // setComments(Comments.filter(comment=>comment._id !== newComment))   // singleComment에서 삭제한 CommentId를 전달받아, Comments Status를 업데이트한다!
+            getCommentsFunction()
         }
     }
 
