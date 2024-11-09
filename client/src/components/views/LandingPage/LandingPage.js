@@ -21,7 +21,7 @@ function LandingPage() {
         fetch(endpoint)
         .then(response => response.json())
         .then(response => {
-            // console.log(response)
+            console.log(response)
             setMovies([...Movies, ...response.results]);    // 기존 Movies state에 가져온 영화정보를 추가한다!
             setMainMovieImage(response.results[0]);
             setCurrentPage(response.page)
@@ -60,6 +60,8 @@ function LandingPage() {
                                     `${IMAGE_BASE_URL}w500${movie.poster_path}` : null}
                                 movieId={movie.id}
                                 movieName={movie.original_title}
+                                vote_average={movie.vote_average}   // 평점
+                                overview={movie.overview}           // 소개글
                             />
                         </React.Fragment>
                     ))}

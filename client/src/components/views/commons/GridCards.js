@@ -4,6 +4,10 @@ import No_Image from './img/No_Image.png';
 
 function GridCards(props) {
 
+    const handleMouseOver = () => {
+        alert(props.movieName);
+    }
+
     // 렌딩 페이지인 경우
     if(props.landingPage) {
         return (
@@ -12,7 +16,7 @@ function GridCards(props) {
             // 가장 작은 사이즈 인 경우에는 1개
             <Col lg={6} md={8} xs={24}>
                 <div style={{ position : 'relative' }}>
-                    <a href={`/movie/${props.movieId}`}>
+                    <a href={`/movie/${props.movieId}`} onMouseOver={handleMouseOver}>
                         <img style={{ width : '100%', height: '400px' }} src={props.image} alt={props.movieName} />
                     </a>
                 </div>
