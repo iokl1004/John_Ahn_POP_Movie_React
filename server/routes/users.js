@@ -90,4 +90,14 @@ router.post("/modify", (req, res) => {
     });
 });
 
+// 회원 탈퇴
+router.delete("/drop", (req, res) => {
+
+    console.log(req.body.userId);
+    User.remove({ _id: req.body.userId }, (err, doc) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({ success: true });
+    });
+});
+
 module.exports = router;

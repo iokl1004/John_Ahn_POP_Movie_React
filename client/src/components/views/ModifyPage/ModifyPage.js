@@ -42,12 +42,28 @@ function ModifyPage(props) {
     const logoutHandler = () => {
         axios.get(`${USER_SERVER}/logout`).then(response => {
           if (response.status === 200) {
-            props.history.push("/login");
+            props.history.push("/login"); 
           } else {
             alert('Log Out Failed')
           }
         });
       };
+
+    // 회원탈퇴
+    const dropMemeber = () => {
+        if(window.confirm('정말 탈퇴하시겠어요? \n탈퇴 버튼 선택 시, 계정은 삭제되며 복구되지 않습니다.'))
+        {
+            axios.delete(`${USER_SERVER}/drop`, { data : {userId : localStorage.getItem('userId')}})
+            .then((response) => {
+            if(response.data.success === true) {
+                alert('회원탈퇴에 성공하였습니다. \n안녕히가세요!');
+                props.history.push("/login"); 
+            } else {
+                alert('회원탈퇴에 실패하였습니다.');
+            }})
+
+        }
+    }
 
     const dispatch = useDispatch();
     return (
@@ -213,6 +229,10 @@ function ModifyPage(props) {
                                 </Button>
                             </Form.Item>
                         </Form>
+
+                        <Button onClick={dropMemeber} type="danger">
+                                    회원탈퇴
+                        </Button>
                     </div>
                 )
             }}   

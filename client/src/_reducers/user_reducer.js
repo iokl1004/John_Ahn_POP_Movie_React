@@ -4,6 +4,7 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     MODIFY_USER,
+    DROP_USER,
 } from '../_actions/types';
  
 
@@ -18,6 +19,8 @@ export default function(state={},action){
         case LOGOUT_USER:
             return {...state }
         case MODIFY_USER:       // 회원정보 수정
+            return {...state, modifySuccess: action.payload }
+        case DROP_USER:         // 회원 탈퇴
             return {...state, modifySuccess: action.payload }
         default:
             return state;

@@ -5,6 +5,7 @@ import {
     AUTH_USER,
     LOGOUT_USER,
     MODIFY_USER,
+    DROP_USER,
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
@@ -55,6 +56,17 @@ export function modifyUser(dataToSubmit){
     
     return {
         type: MODIFY_USER,
+        payload: request
+    }
+}
+
+// 회원 탈퇴
+export function dropUser(dataToSubmit){
+    const request = axios.delete(`${USER_SERVER}/drop`,dataToSubmit)
+        .then(response => response.data);
+    
+    return {
+        type: DROP_USER,
         payload: request
     }
 }
