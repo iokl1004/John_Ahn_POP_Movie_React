@@ -18,7 +18,18 @@ function GridCards(props) {
             color : #ffffff;
             font-weight : 700;
             display : none;
-            // user-select : none;  // 텍스트 복사 방식
+            user-select : auto;  // 텍스트 복사 방식
+        }
+        
+        // 영화 소개글
+        .movie_info .movie_intro {
+            flex: 1;
+            display: -webkit-box;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            word-break: break-all;
         }
 
         // Mouse hover시 이미지가 짙어지며 영화 관련 소개글이 보일 수 있도록 설정
@@ -48,7 +59,7 @@ function GridCards(props) {
                             <div>
                                 평점 : {props.vote_average}
                             </div>
-                            <div>
+                            <div className='movie_intro'>
                                 소개글 : {props.overview}
                             </div>
                         </p>
