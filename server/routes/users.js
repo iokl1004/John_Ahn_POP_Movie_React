@@ -1,4 +1,6 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const router = express.Router();
 const { User } = require("../models/User");
 
@@ -77,11 +79,14 @@ router.get("/logout", auth, (req, res) => {
 // 회원정보 수정 
 router.post("/modify", (req, res) => {
 
-    // console.log(req.body._id);
+    // 비밀번호 암호화
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+
     User.findOneAndUpdate({ _id: req.body._id }, {
-            email: req.body.email,
             name: req.body.name,
             lastName: req.body.lastName,
+            password : hash
         }, (err, doc) => {
         if (err) return res.json({ success: false, err });
         return res.status(200).json({
