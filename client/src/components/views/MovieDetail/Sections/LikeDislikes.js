@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Tooltip } from 'antd';
 import {
   LikeOutlined,
@@ -9,6 +10,7 @@ import {
 import Axios from 'axios';
 
 function LikeDislikes(props) {
+    const user = useSelector((state) => state.user);        // Login한 유저의 정보를 가져온다!
     const [Likes, setLikes] = useState(0);                      // 좋아요 갯수
     const [LikeAction, setLikeAction] = useState('');           // 좋아요 눌렀는지 판단 여부 변수
     const [Dislikes, setDislikes] = useState(0);                // 싫어요 갯수
@@ -62,8 +64,8 @@ function LikeDislikes(props) {
 
         // 좋아요 클릭
         const onLike = () => {
-            // if (!props.user.userData._id) {
-            if (!props.userId) {
+            if (!user.userData._id) {
+
                 alert("로그인 후 Like 기능이 가능합니다.");
                 return;
             }
@@ -97,8 +99,7 @@ function LikeDislikes(props) {
 
         // 싫어요 클릭
         const onDislike = () => {
-            // if (!props.user.userData._id) {
-            if (!props.userId) {
+            if (!user.userData._id) {
                 alert("로그인 후 DisLike 기능이 가능합니다.");
                 return;
             }

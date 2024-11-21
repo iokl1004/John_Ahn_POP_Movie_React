@@ -10,6 +10,7 @@ import Footer from "./views/Footer/Footer"
 import MovieDetail from './views/MovieDetail/MovieDetail';
 import FavoritePage from './views/FavoritePage/FavoritePage.js';
 import ModifyPage from './views/ModifyPage/ModifyPage.js';
+import NotFound from './views/commons/NotFound.js';
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -28,6 +29,9 @@ function App() {
           
           {/* 회원정보 수정 */}
           <Route exact path="/Modify" component={Auth(ModifyPage, true)} />
+
+          {/* 존재하지 않는 페이지 예외처리 */}
+          <Route path="*" component={Auth(NotFound, null)} />
         </Switch>
       </div>
       <Footer />

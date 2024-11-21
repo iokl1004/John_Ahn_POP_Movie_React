@@ -7,7 +7,7 @@ import LikeDislikes from './LikeDislikes';
 
 function SingleComment(props) {
 
-    console.log(props);
+    // console.log(props);
 
     const user = useSelector((state) => state.user);        // Login한 유저의 정보를 가져온다!
     const [OpenReply, setOpenRelpy] = useState(false);      // 대댓글 상태
