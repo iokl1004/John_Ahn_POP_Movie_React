@@ -21,7 +21,7 @@ function LandingPage() {
         fetch(endpoint)
         .then(response => response.json())
         .then(response => {
-            console.log(response)
+            // console.log(response)
             setMovies([...Movies, ...response.results]);    // 기존 Movies state에 가져온 영화정보를 추가한다!
             setMainMovieImage(response.results[0]);
             setCurrentPage(response.page)

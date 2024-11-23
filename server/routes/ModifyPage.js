@@ -105,7 +105,7 @@ function ModifyPage(props) {
                     };
 
                 dispatch(modifyUser(dataToSubmit)).then(response => {
-                    console.log(response.payload);
+                    // console.log(response.payload);
                     if (response.payload.success) {
                         alert("정상적으로 회원정보가 수정되었습니다! 다시 로그인 해주세요.");
                         logoutHandler();

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { List } from 'antd'
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import MainImage from '../LandingPage/Sections/MainImage';
 import MovieInfo from './Sections/MovieInfo';
@@ -9,6 +8,7 @@ import Comment from './Sections/Comment'            // 댓글
 import { useSelector } from "react-redux";
 import LikeDislikes from './Sections/LikeDislikes';
 import CommentCount from './Sections/CommentCount'; // 댓글 카운트
+import NotFound from '../commons/NotFound';         // 페이지 없음
 import Axios from 'axios'
 
 import { Row } from 'antd';
@@ -80,76 +80,81 @@ function MovieDetail(props) {
         setActorToggle(!ActorToggle)
     }
 
-    return (
-        <div>
-            {/* Header */}
+    // 존재하지 않는 영화 페이지인 경우
+    if(Movie.success === false) {
+        return <NotFound movie/>
+    } else {
+        return (
+            <div>
+                {/* Header */}
 
-            <MainImage
-                image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
-                title={Movie.original_title}
-                text={Movie.overview}
-            />
-
-            {/* Body */}
-            <div style={{ width: '85%', margin : '1rem auto '}}>
-                <div style={{ display :'flex', justifyContent : 'flex-end'}} >
-                    {/* 로그인을 한 유저에게만, "Add to Favorite" Button 보이게 하기 */}
-                    {user.userData && user.userData.isAuth &&
-                        <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')}/>
-                    }
-                </div>
-
-                {/* Movie Info */}
-                <MovieInfo 
-                    movie = {Movie}
+                <MainImage
+                    image={`${IMAGE_BASE_URL}w1280${Movie.backdrop_path}`}
+                    title={Movie.original_title}
+                    text={Movie.overview}
                 />
 
-                <br />
-                {/* Actors Grid */}
+                {/* Body */}
+                <div style={{ width: '85%', margin : '1rem auto '}}>
+                    <div style={{ display :'flex', justifyContent : 'flex-end'}} >
+                        {/* 로그인을 한 유저에게만, "Add to Favorite" Button 보이게 하기 */}
+                        {user.userData && user.userData.isAuth &&
+                            <Favorite movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')}/>
+                        }
+                    </div>
 
-                <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
-                    <button onClick={toggleActorView}> 배우 더 보기... </button>
-                </div>
+                    {/* Movie Info */}
+                    <MovieInfo 
+                        movie = {Movie}
+                    />
 
-                {/* ActorToggle 인 경우에만 배우들의 사진을 보여줘라! */}
-                {ActorToggle && 
-                    <Row gutter={[16, 16]} >
-                        {Casts && Casts.map((cast, index) => (
-                            <React.Fragment key={index}>
-                                <GridCards
-                                    character={cast.character}  // 배역명
-                                    image={cast.profile_path ?  // 배우 프로필 사진
-                                        // poster_path값이 없을 경우 null값 처리
-                                        `${IMAGE_BASE_URL}w500${cast.profile_path}` : null}
-                                    characterName={cast.name}   // 배우명
-                                />
-                            </React.Fragment>
-                        ))}
-                    </Row>
-                }
-                <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
-                    <LikeDislikes
-                        movie
-                        userId={localStorage.getItem('userId')}
+                    <br />
+                    {/* Actors Grid */}
+
+                    <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
+                        <button onClick={toggleActorView}> 배우 더 보기... </button>
+                    </div>
+
+                    {/* ActorToggle 인 경우에만 배우들의 사진을 보여줘라! */}
+                    {ActorToggle && 
+                        <Row gutter={[16, 16]} >
+                            {Casts && Casts.map((cast, index) => (
+                                <React.Fragment key={index}>
+                                    <GridCards
+                                        character={cast.character}  // 배역명
+                                        image={cast.profile_path ?  // 배우 프로필 사진
+                                            // poster_path값이 없을 경우 null값 처리
+                                            `${IMAGE_BASE_URL}w500${cast.profile_path}` : null}
+                                        characterName={cast.name}   // 배우명
+                                    />
+                                </React.Fragment>
+                            ))}
+                        </Row>
+                    }
+                    <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
+                        <LikeDislikes
+                            movie
+                            userId={localStorage.getItem('userId')}
+                            movieId={movieId}
+                            user={user}
+                        />
+                    </div>
+
+                    {/* 댓글 수 */}
+                    <CommentCount
+                        CommentCounts={CommentCounts}
+                    />
+
+                    {/* Comment */}
+                    <Comment
+                        refreshFunction={refreshFunction}
+                        commentLists={Comments}
                         movieId={movieId}
-                        user={user}
                     />
                 </div>
-
-                {/* 댓글 수 */}
-                <CommentCount
-                    CommentCounts={CommentCounts}
-                />
-
-                {/* Comment */}
-                <Comment
-                    refreshFunction={refreshFunction}
-                    commentLists={Comments}
-                    movieId={movieId}
-                />
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default MovieDetail
