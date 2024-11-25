@@ -23,10 +23,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">로그인</a>
+          <a href="/login" style={{ textDecoration: "none"}}>로그인</a>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">회원가입</a>
+          <a href="/register" style={{ textDecoration: "none"}}>회원가입</a>
         </Menu.Item>
       </Menu>
     )
@@ -34,10 +34,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler}>로그아웃</a>
+          <a onClick={logoutHandler} style={{ textDecoration: "none"}}>로그아웃</a>
         </Menu.Item>
         <Menu.Item key="modify">
-          <a href="/Modify ">회원정보 수정</a>
+          <a href="/Modify " style={{ textDecoration: "none"}}>회원정보 수정</a>
         </Menu.Item>
       </Menu>
     )

@@ -10,6 +10,8 @@ import LikeDislikes from './Sections/LikeDislikes';
 import CommentCount from './Sections/CommentCount'; // 댓글 카운트
 import NotFound from '../commons/NotFound';         // 페이지 없음
 import Axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 import { Row } from 'antd';
 
@@ -112,7 +114,7 @@ function MovieDetail(props) {
                     {/* Actors Grid */}
 
                     <div style={{display : 'flex', justifyContent : 'center', margin : '2rem' }}>
-                        <button onClick={toggleActorView}> 배우 더 보기... </button>
+                        <Button type="button" onClick={toggleActorView}> 배우 더 보기... </Button>
                     </div>
 
                     {/* ActorToggle 인 경우에만 배우들의 사진을 보여줘라! */}

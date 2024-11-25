@@ -4,6 +4,8 @@ import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
 import { Row } from 'antd';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 function LandingPage() {
 
@@ -71,7 +73,7 @@ function LandingPage() {
 
             {/* 추가로 영화정보 가져오기 */}
             <div style={{ display : 'flex', justifyContent : 'center' }}>
-                <button onClick={loadMoreItems}> Load More </button>
+                <Button type="button" onClick={loadMoreItems}> Load More </Button>
             </div>
 
         </div>
