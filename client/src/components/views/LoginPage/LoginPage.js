@@ -130,9 +130,9 @@ function LoginPage(props) {
 
               <Form.Item>
                 <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >나를 기억해줘!</Checkbox>
-                <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
+                {/*<a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
                   패스워드를 잃어버리셨나요?
-                  </a>
+                </a>*/}
                 <div>
                   <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
                     로그인
