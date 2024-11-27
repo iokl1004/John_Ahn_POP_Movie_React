@@ -12,6 +12,7 @@
     "bootstrap": "^5.3.3",
     "core-js": "^3.6.4",
     "formik": "^1.5.8",
+    "gh-pages": "^6.2.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.6",
@@ -31,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,5 +55,6 @@
     "@ant-design/icons": "^5.5.1",
     "antd": "^4.24.0",
     "http-proxy-middleware": "^1.0.3"
-  }
+  },
+  "homepage": "https://iokl1004.github.io/John_Ahn_POP_Movie_React/"
 }
