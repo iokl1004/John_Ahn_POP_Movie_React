@@ -12,7 +12,6 @@
     "bootstrap": "^5.3.3",
     "core-js": "^3.6.4",
     "formik": "^1.5.8",
-    "gh-pages": "^6.2.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^1.0.6",
@@ -54,7 +53,8 @@
   "devDependencies": {
     "@ant-design/icons": "^5.5.1",
     "antd": "^4.24.0",
+    "gh-pages": "^6.2.0",
     "http-proxy-middleware": "^1.0.3"
   },
-  "homepage": "https://iokl1004.github.io/John_Ahn_POP_Movie_React/"
+  "homepage": "https://iokl1004.github.io/John_Ahn_POP_Movie_React"
 }
