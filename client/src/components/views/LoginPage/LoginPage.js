@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Form, Input, Button, Checkbox, Typography } from 'antd';
 import Icon from '@ant-design/icons';
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -140,7 +141,7 @@ function LoginPage(props) {
                 </div>
                 아직 회원가입을 하지 않으셨나요?!
                 <br />
-                얼른 <a href="/register"> 회원가입 하기!</a>
+                얼른 <Link to="/register"> 회원가입 하기!</Link>
               </Form.Item>
             </form>
           </div>

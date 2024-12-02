@@ -2,6 +2,7 @@ import React from 'react'
 import { Col } from 'antd';
 import No_Image from './img/No_Image.png';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 function GridCards(props) {
 
@@ -51,7 +52,7 @@ function GridCards(props) {
             // 가장 작은 사이즈 인 경우에는 1개
             <Col lg={6} md={8} xs={24}>
                 <ImgWrapper>
-                    <a href={`/movie/${props.movieId}`}>
+                    <Link to={`/movie/${props.movieId}`}>                
                         <p className='movie_info'>
                             <div>
                                 영화 제목 : {props.movieName}
@@ -66,7 +67,7 @@ function GridCards(props) {
                         <div className='post_thumbnail'>
                             <img style={{ width : '100%', height: '500px' }} src={props.image} alt={props.movieName} />
                         </div>
-                    </a>
+                    </Link>
                 </ImgWrapper>
             </Col>
         )

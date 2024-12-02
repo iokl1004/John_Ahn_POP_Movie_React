@@ -1,14 +1,15 @@
 import React from 'react';
 import { Menu } from 'antd';
+import { Link } from 'react-router-dom';
 
 function LeftMenu(props) {
   return (
     <Menu mode={props.mode}>
       <Menu.Item key="mail">
-        <a href="/" style={{ textDecoration: "none"}}>Home</a>
+        <Link to="/" style={{ textDecoration: "none"}}>Home</Link>
       </Menu.Item>
       <Menu.Item key="favorite">
-        <a href="/favorite" style={{ textDecoration: "none"}}>나의 Favorite</a>
+        <Link to="/favorite" style={{ textDecoration: "none"}}>나의 Favorite</Link>
       </Menu.Item>
     </Menu>
   )

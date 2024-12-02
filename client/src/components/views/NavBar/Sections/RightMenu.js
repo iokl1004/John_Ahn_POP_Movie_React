@@ -5,6 +5,7 @@ import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 
 function RightMenu(props) {
   const user = useSelector(state => state.user)
@@ -23,10 +24,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login" style={{ textDecoration: "none"}}>로그인</a>
+          <Link to="/login" style={{ textDecoration: "none"}}>로그인</Link>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register" style={{ textDecoration: "none"}}>회원가입</a>
+          <Link to="/register" style={{ textDecoration: "none"}}>회원가입</Link>
         </Menu.Item>
       </Menu>
     )
@@ -34,10 +35,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="logout">
-          <a onClick={logoutHandler} style={{ textDecoration: "none"}}>로그아웃</a>
+          <Link onClick={logoutHandler} style={{ textDecoration: "none"}}>로그아웃</Link>
         </Menu.Item>
         <Menu.Item key="modify">
-          <a href="/Modify " style={{ textDecoration: "none"}}>회원정보 수정</a>
+          <Link to="/Modify" style={{ textDecoration: "none"}}>회원정보 수정</Link>
         </Menu.Item>
       </Menu>
     )

@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { Popover } from 'antd';
 import { IMAGE_BASE_URL } from '../../Config';
 import No_Image from '../commons/img/No_Image.png';
+import { Link } from 'react-router-dom';
 
 function FavoritePage() {
 
@@ -53,7 +54,7 @@ function FavoritePage() {
         return (
             <tr key={index}>
                 <Popover content={content} title={`${favorite.movieTitle}`}>
-                    <td><a href={`/movie/${favorite.movieId}`}>{favorite.movieTitle}</a></td>
+                    <td><Link to={`/movie/${favorite.movieId}`}>{favorite.movieTitle}</Link></td>
                 </Popover>
                 <td>{favorite.movieRunTime}분</td>
                 <td><button onClick={() => onClickDelete(favorite.movieId, favorite.userFrom)}>Remove</button></td>
