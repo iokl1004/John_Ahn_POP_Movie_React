@@ -16,7 +16,6 @@ import NotFound from './views/commons/NotFound';
 //false  logged in user can't go inside
 
 function App() {
-  console.log(process.env.NODE_ENV);
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar />

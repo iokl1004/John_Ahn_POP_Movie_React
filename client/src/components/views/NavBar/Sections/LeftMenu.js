@@ -8,9 +8,10 @@ function LeftMenu(props) {
       <Menu.Item key="mail">
         <Link to="/" style={{ textDecoration: "none"}}>Home</Link>
       </Menu.Item>
-      <Menu.Item key="favorite">
-        <Link to="/favorite" style={{ textDecoration: "none"}}>나의 Favorite</Link>
-      </Menu.Item>
+        <Menu.Item key="favorite">
+          <Link to="/favorite" style={{ textDecoration: "none"}}>나의 Favorite</Link>
+        </Menu.Item>
+      
     </Menu>
   )
 }

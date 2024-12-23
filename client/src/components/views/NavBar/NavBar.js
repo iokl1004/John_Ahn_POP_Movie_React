@@ -24,13 +24,19 @@ function NavBar() {
       
         <Link to="/" style={{ textDecoration: "none"}}>POP Movie</Link>
       </div>
+      
       <div className="menu__container">
-        <div className="menu_left">
-          <LeftMenu mode="horizontal" />
-        </div>
-        <div className="menu_rigth">
-          <RightMenu mode="horizontal" />
-        </div>
+        {/* 개발 서버에서만 보이게끔 적용 */}
+        {process.env.NODE_ENV !== 'production' &&
+            <div className="menu_left">
+              <LeftMenu mode="horizontal" />
+            </div>
+        }
+        {process.env.NODE_ENV !== 'production' &&
+            <div className="menu_rigth">
+              <RightMenu mode="horizontal" />
+            </div>
+        }
         <Button
           className="menu__mobile-button"
           type="primary"
