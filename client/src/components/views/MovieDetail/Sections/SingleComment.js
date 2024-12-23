@@ -7,7 +7,7 @@ import LikeDislikes from './LikeDislikes';
 
 function SingleComment(props) {
 
-    // console.log(props);
+    console.log(props);
 
     const user = useSelector((state) => state.user);        // Login한 유저의 정보를 가져온다!
     const [OpenReply, setOpenRelpy] = useState(false);      // 대댓글 상태
@@ -54,9 +54,14 @@ function SingleComment(props) {
 
     // 댓글삭제기능 추가    20241107(목)
     const onClickReplyDelete = (e) => {
+        if(props.comment.writer == null ) {
+            alert('탈퇴한 회원의 댓글삭제문의는 관리자에게 문의 바랍니다.')
+            return;
+        }
         if(props.comment.writer._id !== user.userData._id)
         {
             alert('본인이 작성한 댓글만 삭제가 가능합니다.')
+            return;
         }
         else
         {
@@ -100,8 +105,8 @@ function SingleComment(props) {
         <div>
             <Comment
                 actions={actions}
-                author={props.comment.writer.name}
-                avatar={<Avatar src={props.comment.writer.image} />}
+                author={props.comment.writer != null ? props.comment.writer : '탈퇴한 회원'}
+                avatar={<Avatar src={props.comment.writer != null ? props.comment.writer.image : 'null'} />}
                 content={<p>{props.comment.content}</p>}
             />
             
