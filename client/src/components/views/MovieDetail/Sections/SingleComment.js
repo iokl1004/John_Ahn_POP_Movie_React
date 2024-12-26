@@ -86,18 +86,24 @@ function SingleComment(props) {
     const actions = [
         // 해당 댓글에 대한 좋아요/싫어요 가져오기
         <LikeDislikes userId={localStorage.getItem('userId')} commentId={props.comment._id}/>
-        , <span
+        ,
+        // 개발 서버에서만 보이게끔 적용
+        (process.env.NODE_ENV !== 'production' &&
+            <span
             onClick={onClickReplyOpen}
             key="comment-basic-reply-to"
         >
             댓글쓰기
-        </span>
-        , <span
+        </span>)
+        ,
+        // 개발 서버에서만 보이게끔 적용
+        (process.env.NODE_ENV !== 'production' &&
+            <span
             onClick={onClickReplyDelete}
             key="comment-basic-reply-to"
         >
             댓글삭제
-        </span>
+        </span>)
         
     ]
 

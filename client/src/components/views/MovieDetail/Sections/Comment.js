@@ -80,28 +80,35 @@ function Comment(props) {
 
       {/* Root Comment Form */}
 
-      <h4 className="comment-write-heading">
-        <i className="far fa-comment-dots m-r-5">
-          <FontAwesomeIcon icon={faSolComment} />
-        </i>
-        <strong>댓글쓰기</strong>
-      </h4>
-      <form style={{ display : 'flex'}} onSubmit={onSubmit} >
-        <textarea
-          style = {{ width : '100%', borderRadius : '5px' }}
-          onChange={handleClick}
-          value={commentValue}
-          placeholder='코멘트를 작성해 주세요'
-        />
-        <br />
-        <button
-          disabled={!commentValue}
-          className='btn-e btn-e-xlg btn-e-red'
-          onClick={onSubmit}
-        >
-          댓글등록
-        </button>
-      </form>
+      {/* 개발 서버에서만 보이게끔 적용 */}
+      {process.env.NODE_ENV !== 'production' &&
+        <h4 className="comment-write-heading">
+          <i className="far fa-comment-dots m-r-5">
+            <FontAwesomeIcon icon={faSolComment} />
+          </i>
+          <strong>댓글쓰기</strong>
+        </h4>
+      }
+
+      {/* 개발 서버에서만 보이게끔 적용 */}
+      {process.env.NODE_ENV !== 'production' &&
+        <form style={{ display : 'flex'}} onSubmit={onSubmit} >
+          <textarea
+            style = {{ width : '100%', borderRadius : '5px' }}
+            onChange={handleClick}
+            value={commentValue}
+            placeholder='코멘트를 작성해 주세요'
+          />
+          <br />
+          <button
+            disabled={!commentValue}
+            className='btn-e btn-e-xlg btn-e-red'
+            onClick={onSubmit}
+          >
+            댓글등록
+          </button>
+        </form>
+      }
     </div>
   )
 }
